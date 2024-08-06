@@ -73,7 +73,7 @@ def handle_amount(message):
             Stoploss(50usdt)           {stop_loss:.2f}
             Take Profit(100usdt)       {take_profit:.2f}
             """
-
+            print("trade:",formatted_message)
             bot.reply_to(message, formatted_message)
         else:
             bot.reply_to(message, "Por favor, ingresa 'long' o 'short' para el tipo de trade.")
