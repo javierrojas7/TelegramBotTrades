@@ -1,6 +1,10 @@
 import telebot
+from pyfiglet import Figlet
 
 bot = telebot.TeleBot("7495043047:AAG9eZnni5Plh9d9xii8lb-gPutb3EX0L-M", parse_mode=None)
+
+f = Figlet(font='slant')
+print(f.renderText('TelegramBot'))
 
 # Variables globales para almacenar el estado de la conversación
 user_data = {}
