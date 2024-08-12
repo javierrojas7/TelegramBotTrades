@@ -61,26 +61,43 @@ def handle_amount(message):
         trade_type = message.text.lower()
         if trade_type in ["long", "short"]:
             user_data[user_id]['trade_type'] = trade_type
-            
-            # Obtener los valores ingresados
-            amount_in_usd = user_data[user_id]['amount_in_usd']
-            btc_price = user_data[user_id]['btc_price']
-            
-            # Calcular take profit y stop loss
-            take_profit, stop_loss = calculate_trade(btc_price, amount_in_usd, trade_type=trade_type)
-            
-            # Formatear el mensaje
-            formatted_message = f"""
-            {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
-            BTC/USD
-            Price                      {btc_price:.10f}
-            Stoploss(50usdt)           {stop_loss:.10f}
-            Take Profit(100usdt)       {take_profit:.10f}
-            """
-            print("trade:",formatted_message)
-            bot.reply_to(message, formatted_message)
+            bot.reply_to(message, "¿Cuántos decimales deseas utilizar para los resultados?")
         else:
             bot.reply_to(message, "Por favor, ingresa 'long' o 'short' para el tipo de trade.")
+    
+    # Si se ha ingresado el tipo de trade, preguntar por los decimales
+    elif 'decimals' not in user_data[user_id]:
+        try:
+            # Guardar la cantidad de decimales
+            user_data[user_id]['decimals'] = int(message.text)
+            bot.reply_to(message, "Por favor, ingresa el par de trading (por ejemplo, BTC/USD):")
+        except ValueError:
+            bot.reply_to(message, "Por favor, ingresa un número válido para los decimales.")
+    
+    # Si se ha ingresado la cantidad de decimales, preguntar por el par de trading
+    elif 'trading_pair' not in user_data[user_id]:
+        trading_pair = message.text.upper()
+        user_data[user_id]['trading_pair'] = trading_pair
+
+        # Obtener los valores ingresados
+        amount_in_usd = user_data[user_id]['amount_in_usd']
+        btc_price = user_data[user_id]['btc_price']
+        trade_type = user_data[user_id]['trade_type']
+        decimals = user_data[user_id]['decimals']
+        
+        # Calcular take profit y stop loss
+        take_profit, stop_loss = calculate_trade(btc_price, amount_in_usd, trade_type=trade_type)
+        
+        # Formatear el mensaje
+        formatted_message = f"""
+        {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
+        {trading_pair}
+        Price                      {btc_price:.{decimals}f}
+        Stoploss(50usdt)           {stop_loss:.{decimals}f}
+        Take Profit(100usdt)       {take_profit:.{decimals}f}
+        """
+        bot.reply_to(message, formatted_message)
+
 
 @app.route('/')
 def index():
