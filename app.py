@@ -91,12 +91,11 @@ def handle_amount(message):
         
         # Formatear el mensaje
         formatted_message = f"""
-        {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
+            {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
         {trading_pair}
         Price                      {btc_price:.{decimals}f}
         Stoploss(50usdt)           {stop_loss:.{decimals}f}
         Take Profit(100usdt)       {take_profit:.{decimals}f}
-        
         {asciistarwars.rnd_character()}
         """
         print(formatted_message)
