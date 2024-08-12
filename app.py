@@ -1,6 +1,6 @@
 import telebot
 from pyfiglet import Figlet
-from flask import Flask
+from flask import Flask,render_template
 import threading
 
 app = Flask(__name__)
@@ -84,7 +84,7 @@ def handle_amount(message):
 
 @app.route('/')
 def index():
-    return "Bot is running!"
+    return render_template("index.html")
 
 # Función para ejecutar el bot de Telegram
 def run_telegram_bot():
