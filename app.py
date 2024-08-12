@@ -97,7 +97,7 @@ def handle_amount(message):
     Stoploss(50usdt)           {stop_loss:.{decimals}f}
     Take Profit(100usdt)       {take_profit:.{decimals}f}
     
-              {asciistarwars.rnd_character()}
+    {asciistarwars.rnd_character()}
     """
         bot.reply_to(message, formatted_message)
 
