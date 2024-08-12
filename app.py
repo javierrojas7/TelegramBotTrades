@@ -72,9 +72,9 @@ def handle_amount(message):
             formatted_message = f"""
             {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
             BTC/USD
-            Price                      {btc_price:.2f}
-            Stoploss(50usdt)           {stop_loss:.2f}
-            Take Profit(100usdt)       {take_profit:.2f}
+            Price                      {btc_price:.10f}
+            Stoploss(50usdt)           {stop_loss:.10f}
+            Take Profit(100usdt)       {take_profit:.10f}
             """
             print("trade:",formatted_message)
             bot.reply_to(message, formatted_message)
