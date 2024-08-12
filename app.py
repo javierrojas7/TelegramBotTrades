@@ -90,15 +90,13 @@ def handle_amount(message):
         take_profit, stop_loss = calculate_trade(btc_price, amount_in_usd, trade_type=trade_type)
         
         # Formatear el mensaje
-        formatted_message = f"""
-            {'    🟩 Long' if trade_type == 'long' else '    🟥 Short'}
-            {trading_pair}
-            Price                      {btc_price:.{decimals}f}
-            Stoploss(50usdt)           {stop_loss:.{decimals}f}
-            Take Profit(100usdt)       {take_profit:.{decimals}f}
-            \n{asciistarwars.starwarslogo()}
-            Your character is:\n
-            {asciistarwars.rnd_character()}
+        formatted_message = f"""\n{asciistarwars.starwarslogo()}\nYour character is:\n{asciistarwars.rnd_character()}\n
+
+        {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
+        {trading_pair}
+        Price                      {btc_price:.{decimals}f}
+        Stoploss(50usdt)           {stop_loss:.{decimals}f}
+        Take Profit(100usdt)       {take_profit:.{decimals}f}
         """
         print(formatted_message)
         bot.reply_to(message, formatted_message)
