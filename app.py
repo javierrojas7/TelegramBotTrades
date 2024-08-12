@@ -43,7 +43,7 @@ def handle_amount(message):
         try:
             # Guardar la cantidad en USD ingresada por el usuario
             user_data[user_id]['amount_in_usd'] = float(message.text)
-            bot.reply_to(message, "Por favor, ingresa el precio actual del BTC en USD:")
+            bot.reply_to(message, "Por favor, ingresa el precio actual del activo:")
         except ValueError:
             bot.reply_to(message, "Por favor, ingresa un número válido.")
     
@@ -54,7 +54,7 @@ def handle_amount(message):
             user_data[user_id]['btc_price'] = float(message.text)
             bot.reply_to(message, "¿Quieres hacer un trade 'long' o 'short'?")
         except ValueError:
-            bot.reply_to(message, "Por favor, ingresa un número válido para el precio del BTC.")
+            bot.reply_to(message, "Por favor, ingresa un número válido para el precio del activo.")
     
     # Si se ha ingresado el monto en USD y el precio de BTC, preguntar el tipo de trade
     elif 'trade_type' not in user_data[user_id]:
