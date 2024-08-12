@@ -92,11 +92,11 @@ def handle_amount(message):
         # Formatear el mensaje
         formatted_message = f"""
             {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
-        {trading_pair}
-        Price                      {btc_price:.{decimals}f}
-        Stoploss(50usdt)           {stop_loss:.{decimals}f}
-        Take Profit(100usdt)       {take_profit:.{decimals}f}
-        {asciistarwars.rnd_character()}
+            {trading_pair}
+            Price                      {btc_price:.{decimals}f}
+            Stoploss(50usdt)           {stop_loss:.{decimals}f}
+            Take Profit(100usdt)       {take_profit:.{decimals}f}
+            \n{asciistarwars.rnd_character()}
         """
         print(formatted_message)
         bot.reply_to(message, formatted_message)
@@ -104,8 +104,7 @@ def handle_amount(message):
 
 @app.route('/')
 def index():
-    formatted_message = 
-    f"""{asciistarwars.rnd_character()}"""
+    formatted_message = f"""{asciistarwars.rnd_character()}"""
     print(formatted_message)
     bot.send_message(5269538098, formatted_message)
     return render_template("index.html")
