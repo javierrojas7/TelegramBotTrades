@@ -3,3 +3,4 @@ requests
 pyTelegramBotAPI==4.16.1
 gunicorn==21.2.0
 pyfiglet==1.0.2
+Werkzeug==2.0.3
