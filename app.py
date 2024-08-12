@@ -1,9 +1,10 @@
-from flask import Flask
 import telebot
 from pyfiglet import Figlet
+from flask import Flask
 import threading
 
 app = Flask(__name__)
+
 bot = telebot.TeleBot("7495043047:AAG9eZnni5Plh9d9xii8lb-gPutb3EX0L-M", parse_mode=None)
 
 f = Figlet(font='slant')
@@ -81,14 +82,26 @@ def handle_amount(message):
         else:
             bot.reply_to(message, "Por favor, ingresa 'long' o 'short' para el tipo de trade.")
 
-# Ruta para el servidor web
 @app.route('/')
 def index():
     return "Bot is running!"
 
-if __name__ == "__main__":
-    # Iniciar el bot en un hilo separado
-    threading.Thread(target=lambda: bot.infinity_polling(), daemon=True).start()
+# Función para ejecutar el bot de Telegram
+def run_telegram_bot():
+    bot.infinity_polling()
 
-    # Iniciar la aplicación Flask en el puerto 5000
+# Función para ejecutar la aplicación Flask
+def run_flask_app():
     app.run(host="0.0.0.0", port=5000)
+
+if __name__ == "__main__":
+    print("Bot iniciado")
+    
+    # Crear un hilo para el bot de Telegram
+    telegram_thread = threading.Thread(target=run_telegram_bot)
+    
+    # Iniciar el hilo del bot de Telegram
+    telegram_thread.start()
+    
+    # Ejecutar la aplicación Flask
+    run_flask_app()
