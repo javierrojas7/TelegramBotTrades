@@ -9,7 +9,7 @@ for line in file:
         character += line
     else:
         characters.append(character)
-        character = " "
+        character = ""
 file.close()
 
 def rnd_character():

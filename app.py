@@ -104,9 +104,8 @@ def handle_amount(message):
 
 @app.route('/')
 def index():
-    formatted_message = f"""
-    {asciistarwars.rnd_character()}
-    """
+    formatted_message = 
+    f"""{asciistarwars.rnd_character()}"""
     print(formatted_message)
     bot.send_message(5269538098, formatted_message)
     return render_template("index.html")
