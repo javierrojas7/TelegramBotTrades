@@ -3,6 +3,7 @@ from pyfiglet import Figlet
 from flask import Flask,render_template
 import threading
 import asciistarwars
+from randomUrl import obtener_url_aleatoria
 
 app = Flask(__name__)
 
@@ -101,7 +102,7 @@ def handle_amount(message):
         print(formatted_message)
         bot.reply_to(message, formatted_message)
         try:
-             bot.send_animation(message.chat.id, "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3hncG9neGFrb2JxanBoOWhjNjYwdGJ6YmNsOHI0NTdmeGV4cmtwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26FL0ydLDEcARWY0g/giphy.gif")
+             bot.send_animation(message.chat.id, url = obtener_url_aleatoria())
         except Exception as e:
             print(f"Error al enviar el GIF: {e}")
 
