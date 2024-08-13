@@ -9,5 +9,5 @@ def obtener_url_aleatoria():
     
     # Elegir una URL aleatoria
     url_aleatoria = random.choice(urls).strip()
-    
+    print
     return url_aleatoria
