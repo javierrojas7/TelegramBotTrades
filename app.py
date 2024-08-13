@@ -102,7 +102,7 @@ def handle_amount(message):
         bot.reply_to(message, formatted_message)
         try:
             inurl = obtener_url_aleatoria()
-            bot.send_animation(message.chat.id, url = inurl)
+            bot.send_animation(message.chat.id, inurl)
         except Exception as e:
             print(f"Error al enviar el GIF: {e}")
 
