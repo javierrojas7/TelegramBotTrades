@@ -3,6 +3,7 @@ from pyfiglet import Figlet
 from flask import Flask,render_template
 import threading
 import asciistarwars
+from html import escape
 
 app = Flask(__name__)
 
@@ -90,19 +91,8 @@ def handle_amount(message):
         take_profit, stop_loss = calculate_trade(btc_price, amount_in_usd, trade_type=trade_type)
         
         # Formatear el mensaje
-        formatted_message = f"""      
-        .         .    .      .
-        ________   ___   ____
-    .  / __   __| / _ \ |  _ \
-    ___> \ | |   |  _  ||    /__
-   |_____/ |_| . |_| |_||_|\____|
-    _  _  _   ___   ____    ____
-.  | |/ \| | / _ \ |  _ \. / ___|
-   |   .   ||  _  ||    /__> \  .
-    \_/ \_/ |_| |_||_|\______/
-  .            .
-         .                   .
-         \nYour character is:\n{asciistarwars.rnd_character()}\n
+        formatted_message = f"""{escape(asciistarwars.starwarslogo())}\n     
+         \nYour character is:\n{escape(asciistarwars.rnd_character())}\n
 
         {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
         {trading_pair}
