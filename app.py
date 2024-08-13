@@ -91,19 +91,19 @@ def handle_amount(message):
         
         # Formatear el mensaje
         formatted_message = f"""{asciistarwars.starwarslogoDots()}\n     
-         \nYour character is:\n{asciistarwars.rnd_character()}\n
         {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
         {trading_pair}
         Price                      {btc_price:.{decimals}f}
         Stoploss(50usdt)           {stop_loss:.{decimals}f}
         Take Profit(100usdt)       {take_profit:.{decimals}f}
+        \nYour character is:\n
         """
         print(formatted_message)
+        bot.reply_to(message, formatted_message)
         try:
              bot.send_animation(message.chat.id, "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3hncG9neGFrb2JxanBoOWhjNjYwdGJ6YmNsOHI0NTdmeGV4cmtwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26FL0ydLDEcARWY0g/giphy.gif")
         except Exception as e:
             print(f"Error al enviar el GIF: {e}")
-        bot.reply_to(message, formatted_message)
 
 
 @app.route('/')
