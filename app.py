@@ -91,18 +91,7 @@ def handle_amount(message):
         
         # Formatear el mensaje
         formatted_message = f"""{asciistarwars.starwarslogoDots()}\n     
-         \nYour character is:\n
-⢀⣀⣀⡀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀
-⠈⢹⠉⢁⣴⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀
-⠀⢸⠀⣾⣿⣿⣿⣿⣿⣿⣷⣶⣿⣿⡀⠀
-⠀⣾⢀⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⡀⠀
-⠀⣿⣤⣀⠈⠉⠉⢻⣿⡟⠉⠉⠉⣀⣤⠀
-⠀⠀⣿⣿⣷⣄⠀⢸⣿⡇⠀⢠⣾⣿⣿⡀
-⠀⢰⣿⣿⣿⣿⡆⢸⣿⡇⢠⣿⣿⣿⣿⡇
-⠀⠈⠙⠻⢿⣿⣿⢸⣿⡇⣸⣿⡿⠟⠋⠁
-⠀⠀⠀⠀⠀⠈⠉⠈⠉⠁⠉⠁
-     M A N D O⠀⠀⠀⠀
-\n
+         \nYour character is:\n{asciistarwars.rnd_character()}\n
         {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
         {trading_pair}
         Price                      {btc_price:.{decimals}f}
@@ -110,6 +99,10 @@ def handle_amount(message):
         Take Profit(100usdt)       {take_profit:.{decimals}f}
         """
         print(formatted_message)
+        try:
+            bot.send_animation(message, "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTl0bzBtNmR3NDgxMDZ6cmNubWw0dWkyeHl0bzl6MHYyNGlubjRqZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9DPpf0zTqRASyzTi/giphy.gif")
+        except:
+            print("error gif")
         bot.reply_to(message, formatted_message)
 
 
