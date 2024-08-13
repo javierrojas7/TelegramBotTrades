@@ -18,6 +18,9 @@ def rnd_character():
 def starwarslogo():
     return characters[0]
 
+def starwarslogoDots():
+    return characters[1]
+
 def all_characters():
     return characters
 
