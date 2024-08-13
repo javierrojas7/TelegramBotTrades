@@ -97,7 +97,6 @@ def handle_amount(message):
         Price                      {btc_price:.{decimals}f}
         Stoploss(50usdt)           {stop_loss:.{decimals}f}
         Take Profit(100usdt)       {take_profit:.{decimals}f}
-        \nYour character is:\n
         """
         print(formatted_message)
         bot.reply_to(message, formatted_message)
