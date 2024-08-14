@@ -28,15 +28,37 @@ def calculate_trade(btc_price, amount_in_usd, profit_target=100, stop_loss_amoun
 
     return sell_price_for_profit, sell_price_for_loss
 
+# Función para manejar la conversión de divisas
+def convert_currency(amount, rate):
+    return amount * rate
+
 # Comando /start
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     user_id = message.chat.id
-    user_data[user_id] = {}  # Inicializa los datos del usuario
+    user_data[user_id] = {'command': 'start'}  # Inicializa los datos del usuario
     bot.reply_to(message, "¡Bienvenido! ¿Con cuántos dólares deseas hacer el trade?")
 
-# Función para manejar la cantidad en dólares
+# Comando /transform
+@bot.message_handler(commands=['transform'])
+def convert_currency_command(message):
+    user_id = message.chat.id
+    user_data[user_id] = {'command': 'transform'}  # Inicializa los datos del usuario
+    bot.reply_to(message, "¿Cuánto tienes de la divisa inicial?")
+    
+# Inicial-Función para manejar la cantidad en dólares o la conversión de divisas
 @bot.message_handler(func=lambda message: True)
+def handle_message(message):
+    user_id = message.chat.id
+
+    # Verifica cuál comando fue utilizado
+    command = user_data.get(user_id, {}).get('command')
+
+    if command == 'start':
+        handle_amount(message)
+    elif command == 'transform':
+        handle_currency_conversion(message, user_id)
+        
 def handle_amount(message):
     user_id = message.chat.id
 
@@ -115,6 +137,25 @@ def handle_amount(message):
             bot.send_animation(message.chat.id, inurl)
         except Exception as e:
             print(f"Error al enviar el GIF: {e}")
+
+# Función para manejar la conversión de divisas
+def handle_currency_conversion(message, user_id):
+    if 'amount_in_currency' not in user_data[user_id]:
+        try:
+            amount_in_currency = float(message.text)
+            user_data[user_id]['amount_in_currency'] = amount_in_currency
+            bot.reply_to(message, "Por favor, ingresa el tipo de cambio actual para la conversión:")
+        except ValueError:
+            bot.reply_to(message, "Por favor, ingresa un número válido.")
+    elif 'exchange_rate' not in user_data[user_id]:
+        try:
+            exchange_rate = float(message.text)
+            amount_in_currency = user_data[user_id]['amount_in_currency']
+            converted_amount = convert_currency(amount_in_currency, exchange_rate)
+            bot.reply_to(message, f"Con una tasa de cambio de {exchange_rate}, tienes un total de {converted_amount:.2f} en la divisa objetivo.")
+            user_data[user_id] = {}  # Limpiar los datos del usuario después de procesar
+        except ValueError:
+            bot.reply_to(message, "Por favor, ingresa un número válido para el tipo de cambio.")
 
 
 @app.route('/')
