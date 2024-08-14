@@ -91,8 +91,17 @@ def handle_amount(message):
         take_profit, stop_loss = calculate_trade(btc_price, amount_in_usd, trade_type=trade_type)
         
         # Formatear el mensaje
-        formatted_message = f"""
-        {asciistarwars.starwarslogoDots()}\n    
+        formatted_message = f"""\n 
+                        ⠀⠀⠀⠀⣿⡇⠀⢸⣿⡇⠀⠀⠀⠀
+                        ⠸⠿⣿⣿⣿⡿⠿⠿⣿⣿⣿⣶⣄⠀
+                        ⠀⠀⢸⣿⣿⡇⠀⠀⠀⠈⣿⣿⣿⠀
+                        ⠀⠀⢸⣿⣿⡇⠀⠀⢀⣠⣿⣿⠟⠀
+                        ⠀⠀⢸⣿⣿⡿⠿⠿⠿⣿⣿⣥⣄⠀
+                        ⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⢻⣿⣿⣧
+                        ⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⣼⣿⣿⣿
+                        ⢰⣶⣿⣿⣿⣷⣶⣶⣾⣿⣿⠿⠛⠁
+                        ⠀⠀⠀⠀⣿⡇⠀⢸⣿⡇⠀
+        \n    
         {'🟩 Long' if trade_type == 'long' else '🟥 Short'}
         {trading_pair}
         Price                      {btc_price:.{decimals}f}
